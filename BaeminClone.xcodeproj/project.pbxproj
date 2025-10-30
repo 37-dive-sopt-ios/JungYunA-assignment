@@ -7,26 +7,26 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		AE6CD9DB2EB2FF4600758FA6 /* BaminClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaminClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE6CD9DB2EB2FF4600758FA6 /* BaeminClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaeminClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		AE6CD9ED2EB2FF4700758FA6 /* Exceptions for "BaminClone" folder in "BaminClone" target */ = {
+		AE6CD9ED2EB2FF4700758FA6 /* Exceptions for "BaeminClone" folder in "BaeminClone" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = AE6CD9DA2EB2FF4600758FA6 /* BaminClone */;
+			target = AE6CD9DA2EB2FF4600758FA6 /* BaeminClone */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		AE6CD9DD2EB2FF4600758FA6 /* BaminClone */ = {
+		AE6CD9DD2EB2FF4600758FA6 /* BaeminClone */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				AE6CD9ED2EB2FF4700758FA6 /* Exceptions for "BaminClone" folder in "BaminClone" target */,
+				AE6CD9ED2EB2FF4700758FA6 /* Exceptions for "BaeminClone" folder in "BaeminClone" target */,
 			);
-			path = BaminClone;
+			path = BaeminClone;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -45,7 +45,7 @@
 		AE6CD9D22EB2FF4600758FA6 = {
 			isa = PBXGroup;
 			children = (
-				AE6CD9DD2EB2FF4600758FA6 /* BaminClone */,
+				AE6CD9DD2EB2FF4600758FA6 /* BaeminClone */,
 				AE6CD9DC2EB2FF4600758FA6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,7 +53,7 @@
 		AE6CD9DC2EB2FF4600758FA6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AE6CD9DB2EB2FF4600758FA6 /* BaminClone.app */,
+				AE6CD9DB2EB2FF4600758FA6 /* BaeminClone.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,9 +61,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AE6CD9DA2EB2FF4600758FA6 /* BaminClone */ = {
+		AE6CD9DA2EB2FF4600758FA6 /* BaeminClone */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AE6CD9EE2EB2FF4700758FA6 /* Build configuration list for PBXNativeTarget "BaminClone" */;
+			buildConfigurationList = AE6CD9EE2EB2FF4700758FA6 /* Build configuration list for PBXNativeTarget "BaeminClone" */;
 			buildPhases = (
 				AE6CD9D72EB2FF4600758FA6 /* Sources */,
 				AE6CD9D82EB2FF4600758FA6 /* Frameworks */,
@@ -74,13 +74,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				AE6CD9DD2EB2FF4600758FA6 /* BaminClone */,
+				AE6CD9DD2EB2FF4600758FA6 /* BaeminClone */,
 			);
-			name = BaminClone;
+			name = BaeminClone;
 			packageProductDependencies = (
 			);
 			productName = BaminClone;
-			productReference = AE6CD9DB2EB2FF4600758FA6 /* BaminClone.app */;
+			productReference = AE6CD9DB2EB2FF4600758FA6 /* BaeminClone.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -98,7 +98,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AE6CD9D62EB2FF4600758FA6 /* Build configuration list for PBXProject "BaminClone" */;
+			buildConfigurationList = AE6CD9D62EB2FF4600758FA6 /* Build configuration list for PBXProject "BaeminClone" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -112,7 +112,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AE6CD9DA2EB2FF4600758FA6 /* BaminClone */,
+				AE6CD9DA2EB2FF4600758FA6 /* BaeminClone */,
 			);
 		};
 /* End PBXProject section */
@@ -322,7 +322,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AE6CD9D62EB2FF4600758FA6 /* Build configuration list for PBXProject "BaminClone" */ = {
+		AE6CD9D62EB2FF4600758FA6 /* Build configuration list for PBXProject "BaeminClone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AE6CD9F12EB2FF4700758FA6 /* Debug */,
@@ -331,7 +331,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AE6CD9EE2EB2FF4700758FA6 /* Build configuration list for PBXNativeTarget "BaminClone" */ = {
+		AE6CD9EE2EB2FF4700758FA6 /* Build configuration list for PBXNativeTarget "BaeminClone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AE6CD9EF2EB2FF4700758FA6 /* Debug */,
