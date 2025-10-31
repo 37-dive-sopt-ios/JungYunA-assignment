@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 import SnapKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
-    lazy var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "이메일 또는 아이디로 계속"
-        label.font = UIFont(name: "Pretendard_SemiBold", size: 18)
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         label.textAlignment = .center
         return label
     }()
@@ -40,6 +40,10 @@ class LoginViewController: UIViewController {
         
         textField.addLeftPadding()
         textField.addRightPadding()
+        
+        textField.delegate = self
+        textField.returnKeyType = .next
+        textField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
         return textField
     }()
     
@@ -54,8 +58,38 @@ class LoginViewController: UIViewController {
         textField.layer.borderColor = UIColor(named: "baemin_gray_200")?.cgColor
         textField.font = UIFont(name: "Pretendard_Regular", size: 14)
         
+        
         textField.addLeftPadding()
         textField.addRightPadding()
+        
+        textField.delegate = self
+        textField.isSecureTextEntry = true
+        textField.returnKeyType = .done
+        textField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
+        
+        //전체 삭제
+        let clearButton = UIButton()
+        clearButton.setImage(UIImage(named: "cancle"), for: .normal)
+        clearButton.addTarget(self, action: #selector(clearPasswordField), for: .touchUpInside)
+        
+        //눈 버튼
+        let eyeButton = UIButton()
+        eyeButton.setImage(UIImage(named: "eyeslash"), for: .normal) //기본은 가려져 있음
+        eyeButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
+        
+        //버튼 2개 묶기
+        let rightStack = UIStackView(arrangedSubviews: [clearButton, eyeButton])
+        rightStack.axis = .horizontal
+        rightStack.spacing = 20
+        
+        let container = UIView()
+        container.addSubview(rightStack)
+        rightStack.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(20)
+        }
+        
+        textField.rightView = container
+        textField.rightViewMode = .always
         
         return textField
     }()
@@ -67,24 +101,17 @@ class LoginViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: "Pretendard_Bold", size: 18)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 4
+        button.isEnabled = false //기본값 비활성화
+         
+        button.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
         return button
     }()
     
     lazy var findAccountButton: UIButton = {
         let button = UIButton()
-        button.setTitle("계정 찾기", for: .normal)
+        button.setTitle("계정 찾기 >", for: .normal)
         button.setTitleColor(.baeminBlack, for: .normal)
         button.titleLabel?.font = UIFont(name: "Pretendard_Regular", size: 14)
-        
-        //아이콘
-        let nextImage = UIImage(named: "next")
-        button.setImage(nextImage, for: .normal)
-        button.tintColor = .black
-        
-        //텍스트 이미지 간격 조정
-        
-        button.semanticContentAttribute = .forceRightToLeft
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -4, bottom :0, right: 8)
         
         return button
     }()
@@ -167,6 +194,92 @@ class LoginViewController: UIViewController {
         }
         
     }
+    
+    // MARK: - Action
+    
+    //이메일, 비밀번호 입력 감지 후 로그인 버튼 활성화
+    @objc
+    private func textDidChange(_ textField: UITextField) {
+        let emailFilled = !(emailTextField.text ?? "").trimmingCharacters(in: .whitespaces).isEmpty
+        let passwordFilled = !(passwordTextField.text ?? "").trimmingCharacters(in: .whitespaces).isEmpty
+        
+        if emailFilled && passwordFilled {
+            loginButton.isEnabled = true
+            loginButton.backgroundColor = UIColor(named: "baemin_mint_500") ?? .blue
+        } else {
+            loginButton.isEnabled = false
+            loginButton.backgroundColor = UIColor(named: "baemin_gray_200") ?? .lightGray
+        }
+    }
+    
+    //비밀번호 보기, 숨기기
+    @objc
+    private func togglePasswordVisibility() {
+        passwordTextField.isSecureTextEntry.toggle()
+        if let button = (passwordTextField.rightView as? UIView)?.subviews.first(where: { $0 is UIStackView })?.subviews.last as? UIButton {
+            let icon = passwordTextField.isSecureTextEntry ? "eyeslash" : "eye"
+            button.setImage(UIImage(named: icon), for: .normal)
+        }
+    }
+    
+    //비밀번호 전체 삭제
+    @objc
+    private func clearPasswordField() {
+        passwordTextField.text = ""
+        textDidChange(passwordTextField)
+    }
+    
+    private func pushToWelcomeVC() {
+        let welcomeVC = WelcomeViewController()
+        welcomeVC.id = emailTextField.text
+        self.navigationController?.pushViewController(welcomeVC, animated: true)
+    }
+    
+    //로그인 버튼 눌렀을 때 화면 전환
+    @objc
+    private func loginButtonDidTap() {
+        self.pushToWelcomeVC()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        emailTextField.text = ""
+        passwordTextField.text = ""
+        
+        loginButton.isEnabled = false
+        loginButton.backgroundColor = UIColor(named: "baemin_gray_200") ?? .lightGray
+    }
+    
+    // MARK: - deleagate
+    
+    func textFieldDidBeginEditing(_ textField: UITextField){
+        textField.layer.borderColor = UIColor(named: "baemin_black")?.cgColor
+        textField.layer.borderWidth = 2
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField){
+        textField.layer.borderColor = UIColor(named: "baemin_gray_200")?.cgColor
+        textField.layer.borderWidth = 1
+    
+    }
+    
+    //엔터 치면 다음 칸으로 넘어가게
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextField {
+            passwordTextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
+    
+    
+    
+    
+
 }
 
 
