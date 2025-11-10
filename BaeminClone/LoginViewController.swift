@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 import SnapKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+
+final class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -19,7 +20,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return label
     }()
     
-    lazy var backButton: UIButton = {
+    var backButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "back"), for: .normal)
         button.tintColor = .black
@@ -107,9 +108,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return button
     }()
     
-    lazy var findAccountButton: UIButton = {
+    var findAccountButton: UIButton = {
         let button = UIButton()
-        button.setTitle("계정 찾기 >", for: .normal)
+        button.setTitle("계정 찾기 >", for: .normal)   //수정
         button.setTitleColor(.baeminBlack, for: .normal)
         button.titleLabel?.font = UIFont(name: "Pretendard_Regular", size: 14)
         
@@ -120,76 +121,63 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Life Cycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        setUI()
-        setHierarchy()
-        setLayout()
+        emailTextField.text = ""
+        passwordTextField.text = ""
         
+        loginButton.isEnabled = false
+        loginButton.backgroundColor = UIColor(named: "baemin_gray_200") ?? .lightGray
     }
+    
     
     // MARK: - UI & Layout
     
-    private func setUI() {
-        view.backgroundColor = .white
-    }
-    
-    private func setHierarchy() {
-        [
-            titleLabel,
-            backButton,
-            emailTextField,
-            passwordTextField,
-            loginButton,
-            findAccountButton
-        ].forEach{self.view.addSubview($0)}
+    override func setLayout() {
         
-    }
-    
-    private func setLayout() {
-        
-        backButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(45)
-            $0.leading.equalToSuperview().offset(16)
-            $0.width.height.equalTo(36)
-        }
+        view.addSubviews(titleLabel,
+                        backButton,
+                        emailTextField,
+                        passwordTextField,
+                        loginButton,
+                        findAccountButton)
         
         
         titleLabel.snp.makeConstraints{
-            $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().offset(45)
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-16)
-            $0.centerY.equalTo(backButton)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.horizontalEdges.equalToSuperview().inset(99)
             $0.height.equalTo(42)
+        }
+        
+        backButton.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.equalToSuperview().offset(8)
+            $0.centerY.equalTo(titleLabel)
+            $0.width.height.equalTo(36)
         }
         
         emailTextField.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(24)
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-16)
+            $0.horizontalEdges.equalToSuperview().inset(16)
             $0.height.equalTo(46)
         }
         
         passwordTextField.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(82)
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-16)
+            $0.horizontalEdges.equalToSuperview().inset(16)
             $0.height.equalTo(46)
         }
         
         loginButton.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(148)
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-16)
+            $0.horizontalEdges.equalToSuperview().inset(16)
             $0.height.equalTo(46)
         }
         
         findAccountButton.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(226)
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-16)
+            $0.horizontalEdges.equalToSuperview().inset(154.5)
             $0.height.equalTo(14)
         }
         
@@ -241,17 +229,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.pushToWelcomeVC()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        emailTextField.text = ""
-        passwordTextField.text = ""
-        
-        loginButton.isEnabled = false
-        loginButton.backgroundColor = UIColor(named: "baemin_gray_200") ?? .lightGray
-    }
-    
-    // MARK: - deleagate
+    // MARK: - delegate
     
     func textFieldDidBeginEditing(_ textField: UITextField){
         textField.layer.borderColor = UIColor(named: "baemin_black")?.cgColor
@@ -286,7 +264,5 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
 
 #Preview{
-    let vc = LoginViewController()
-        vc.loadViewIfNeeded()
-        return UINavigationController(rootViewController: vc)
+    LoginViewController()
     }

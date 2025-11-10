@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-final class WelcomeViewController: UIViewController {
+final class WelcomeViewController: BaseViewController {
     
     var id: String?
     
@@ -18,7 +18,6 @@ final class WelcomeViewController: UIViewController {
         title.text = "대체 뼈찜 누가 시켰어??"
         title.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         title.textAlignment = .center
-        
         return title
     }()
     
@@ -39,16 +38,13 @@ final class WelcomeViewController: UIViewController {
         label.text = "환영합니다"
         label.font = UIFont(name: "Pretendard-Bold", size: 24)
         label.textAlignment = .center
-        
         return label
     }()
     
     private let idLabel: UILabel = {
         let label = UILabel()
-        label.text = "ㅇㅇ님 반가워요!"
         label.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         label.textAlignment = .center
-        
         return label
     }()
     
@@ -59,48 +55,30 @@ final class WelcomeViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: "Pretendard-Bold", size: 18)
         button.setTitleColor(UIColor(named: "baemin-white"), for: .normal)
         button.layer.cornerRadius = 4
-         
         button.addTarget(self, action: #selector(backToLogin), for: .touchUpInside)
         return button
-        
     }()
     
     
-    
-    
-    override func viewDidLoad() {
+    override func setLayout() {
         
-        super.viewDidLoad()
-        
-        view.backgroundColor = .white
-        
-        setLayout()
-        bindID()
-        
-    }
-    
-    private func setLayout() {
-        [welcomeImage, welcomeLabel,idLabel,titleLabel, backButton, backtoLoginButton].forEach{self.view.addSubview($0)}
-        
-        backButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(45)
-            $0.leading.equalToSuperview().offset(16)
-            $0.width.height.equalTo(36)
-        }
+        view.addSubviews(welcomeImage, welcomeLabel,idLabel,titleLabel, backButton, backtoLoginButton)
         
         titleLabel.snp.makeConstraints{
-            $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().offset(45)
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-16)
-            $0.centerY.equalTo(backButton)
+            $0.leading.equalToSuperview().inset(111)
             $0.height.equalTo(42)
+        }
+        
+        backButton.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.equalToSuperview().offset(8)
+            $0.centerY.equalTo(titleLabel)
+            $0.width.height.equalTo(36)
         }
         
         welcomeImage.snp.makeConstraints{
             $0.top.equalTo(titleLabel.snp.bottom).offset(6)
-            $0.leading.equalToSuperview().offset(0)
-            $0.trailing.equalToSuperview().offset(0)
+            $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(211)
         }
         
@@ -138,5 +116,9 @@ final class WelcomeViewController: UIViewController {
         }
         
     }
+}
+
+#Preview{
+    WelcomeViewController()
 }
 
