@@ -145,7 +145,7 @@ final class NavigationView : BaseView {
             $0.leading.equalTo(orderLabel.snp.trailing).offset(31)
             $0.size.equalTo(CGSize(width: 44, height: 10))
         }
-
+        
     }
     
     

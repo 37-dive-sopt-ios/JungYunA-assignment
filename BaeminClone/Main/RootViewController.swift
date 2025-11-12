@@ -47,7 +47,7 @@ final class RootViewController: BaseViewController {
         collectionView.register(ShopCell.self, forCellWithReuseIdentifier: ShopCell.identifier)
         collectionView.register(AddCell.self, forCellWithReuseIdentifier: AddCell.identifier)
     }
-   
+    
     
 }
 
@@ -144,18 +144,18 @@ extension RootViewController: UICollectionViewDelegateFlowLayout {
         }
         
         return CGSize(width: 30, height: 30)
-
+        
     }
     
     func collectionView(_ collectionView: UICollectionView,
-                            layout collectionViewLayout: UICollectionViewLayout,
-                            insetForSectionAt section: Int) -> UIEdgeInsets {
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
         
         if section == 4 || section == 5 {
             return UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
         }
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        }
+    }
 }
 
 

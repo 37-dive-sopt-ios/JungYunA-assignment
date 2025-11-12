@@ -25,7 +25,7 @@ final class AddNameCell : UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-//        setUI()
+        //setUI()
         setHierarchy()
         setLayout()
     }
@@ -36,9 +36,9 @@ final class AddNameCell : UICollectionViewCell {
     
     // MARK: - UI & Layout
     
-//    private func setUI() {
-//        contentView.backgroundColor = .yellow
-//    }
+    //    private func setUI() {
+    //        contentView.backgroundColor = .yellow
+    //    }
     
     private func setHierarchy() {
         contentView.addSubviews(nameLabel)

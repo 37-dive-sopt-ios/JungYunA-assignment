@@ -17,17 +17,17 @@ final class BannerCell : UICollectionViewCell {
         return button
     }()
     
-        let addLabel: UILabel = {
-            let label = UILabel()
-            label.text = "전상품 쿠폰팩 + 60%특가 >"
-            label.textColor = UIColor(named: "baemin_black")
-            label.font = UIFont(name: "Pretendard-Bold", size: 16)
-            return label
-        }()
+    let addLabel: UILabel = {
+        let label = UILabel()
+        label.text = "전상품 쿠폰팩 + 60%특가 >"
+        label.textColor = UIColor(named: "baemin_black")
+        label.font = UIFont(name: "Pretendard-Bold", size: 16)
+        return label
+    }()
     
     // MARK: - Initialization
     
-        override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         
         setUI()
@@ -60,7 +60,7 @@ final class BannerCell : UICollectionViewCell {
         }
     }
     
- }
+}
 
 #Preview{
     BannerCell()

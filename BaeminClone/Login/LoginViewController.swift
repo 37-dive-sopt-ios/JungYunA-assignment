@@ -103,7 +103,7 @@ final class LoginViewController: BaseViewController, UITextFieldDelegate {
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 4
         button.isEnabled = false //기본값 비활성화
-         
+        
         button.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
         return button
     }()
@@ -137,11 +137,11 @@ final class LoginViewController: BaseViewController, UITextFieldDelegate {
     override func setLayout() {
         
         view.addSubviews(titleLabel,
-                        backButton,
-                        emailTextField,
-                        passwordTextField,
-                        loginButton,
-                        findAccountButton)
+                         backButton,
+                         emailTextField,
+                         passwordTextField,
+                         loginButton,
+                         findAccountButton)
         
         
         titleLabel.snp.makeConstraints{
@@ -240,7 +240,7 @@ final class LoginViewController: BaseViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField){
         textField.layer.borderColor = UIColor(named: "baemin_gray_200")?.cgColor
         textField.layer.borderWidth = 1
-    
+        
     }
     
     //엔터 치면 다음 칸으로 넘어가게
@@ -257,7 +257,7 @@ final class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     
     
-
+    
 }
 
 
@@ -265,4 +265,4 @@ final class LoginViewController: BaseViewController, UITextFieldDelegate {
 
 #Preview{
     LoginViewController()
-    }
+}

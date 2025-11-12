@@ -33,6 +33,7 @@ final class MenuCell : UICollectionViewCell {
         collectionView.backgroundColor = .white
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     
@@ -44,14 +45,14 @@ final class MenuCell : UICollectionViewCell {
     }()
     
     // "음식배달에서 더보기  >" 버튼 (가운데 정렬)
-        private lazy var moreButton: UIButton = {
-            let b = UIButton(type: .system)
-            b.setTitle("음식배달에서 더보기 >", for: .normal)
-            b.setTitleColor(UIColor(named: "baemin_black")!, for: .normal)
-            b.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
-            return b
-        }()
-
+    private lazy var moreButton: UIButton = {
+        let b = UIButton(type: .system)
+        b.setTitle("음식배달에서 더보기 >", for: .normal)
+        b.setTitleColor(UIColor(named: "baemin_black")!, for: .normal)
+        b.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
+        return b
+    }()
+    
     
     
     // MARK: - Initialization
@@ -85,17 +86,17 @@ final class MenuCell : UICollectionViewCell {
         
         divider.snp.makeConstraints {
             $0.top.equalToSuperview().offset(201)
-                    $0.leading.trailing.equalToSuperview()
-                    $0.height.equalTo(1)
-                }
-
-                moreButton.snp.makeConstraints {
-                    $0.top.equalTo(divider.snp.bottom).offset(10)
-                    $0.centerX.equalToSuperview()
-                    $0.bottom.equalToSuperview().inset(10) // 셀의 바닥까지
-                    $0.height.equalTo(32)
-                }
-
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        
+        moreButton.snp.makeConstraints {
+            $0.top.equalTo(divider.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(10) // 셀의 바닥까지
+            $0.height.equalTo(32)
+        }
+        
         collectionView.register(MenuNameCell.self, forCellWithReuseIdentifier: MenuNameCell.identifier)
         
         
@@ -127,9 +128,9 @@ extension MenuCell: UICollectionViewDataSource {
 extension MenuCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: 62, height: 78)
+        return CGSize(width: 65, height: 78)
         
     }
     
-
+    
 }

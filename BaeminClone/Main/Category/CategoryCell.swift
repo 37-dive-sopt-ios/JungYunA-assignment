@@ -64,7 +64,7 @@ final class CategoryCell : UICollectionViewCell {
             $0.edges.equalToSuperview()
             
         }
-
+        
         collectionView.register(CategoryNameCell.self, forCellWithReuseIdentifier: CategoryNameCell.identifier)
         
         

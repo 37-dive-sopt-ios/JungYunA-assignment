@@ -67,15 +67,15 @@ final class CategoryNameCell : UICollectionViewCell {
             $0.width.equalToSuperview()
             $0.height.equalTo(2)
         }
-
-
+        
+        
     }
     
     // MARK: - Configuration
     
-//    public func configure(feed: FeedModel) {
-//        nameLabel.text = feed.name
-//    }
+    //    public func configure(feed: FeedModel) {
+    //        nameLabel.text = feed.name
+    //    }
 }
 
 #Preview{

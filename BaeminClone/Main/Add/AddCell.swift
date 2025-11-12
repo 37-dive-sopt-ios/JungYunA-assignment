@@ -32,6 +32,7 @@ final class AddCell : UICollectionViewCell {
         collectionView.backgroundColor = .white
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     
@@ -62,7 +63,7 @@ final class AddCell : UICollectionViewCell {
             $0.edges.equalToSuperview()
             
         }
-
+        
         collectionView.register(AddNameCell.self, forCellWithReuseIdentifier: AddNameCell.identifier)
         
         
@@ -87,16 +88,16 @@ extension AddCell: UICollectionViewDataSource {
         }
         
         // ✅ 인덱스에 따라 배경색 지정
-            switch indexPath.item {
-            case 0:
-                cell.backgroundColor = .systemBlue
-            case 1:
-                cell.backgroundColor = .systemGreen
-            case 2:
-                cell.backgroundColor = .systemPink
-            default:
-                cell.backgroundColor = .lightGray
-            }
+        switch indexPath.item {
+        case 0:
+            cell.backgroundColor = .systemBlue
+        case 1:
+            cell.backgroundColor = .systemGreen
+        case 2:
+            cell.backgroundColor = .systemPink
+        default:
+            cell.backgroundColor = .lightGray
+        }
         
         return cell
         
@@ -110,5 +111,5 @@ extension AddCell: UICollectionViewDelegateFlowLayout {
         
     }
     
-
+    
 }

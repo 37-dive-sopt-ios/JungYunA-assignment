@@ -24,7 +24,7 @@ final class MenuNameCell : UICollectionViewCell {
     }()
     
     private let imageLabel : UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.backgroundColor = UIColor(named: "baemin_gray_200")
         label.layer.cornerRadius = 20
         return label

@@ -31,9 +31,10 @@ final class ShopCell : UICollectionViewCell {
         collectionView.backgroundColor = .white
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
-
+    
     
     
     // MARK: - Initialization
@@ -62,7 +63,7 @@ final class ShopCell : UICollectionViewCell {
             $0.edges.equalToSuperview()
             
         }
-
+        
         collectionView.register(ShopNameCell.self, forCellWithReuseIdentifier: ShopNameCell.identifier)
         
         
@@ -98,5 +99,5 @@ extension ShopCell: UICollectionViewDelegateFlowLayout {
         
     }
     
-
+    
 }
