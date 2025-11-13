@@ -12,6 +12,8 @@ final class MenuCell : UICollectionViewCell {
     
     static let identifier: String = "MenuCell"
     
+    private var menu : [Menu] = []
+    
     // MARK: - Properties
     
     private let lineSpacing: CGFloat = 8
@@ -99,7 +101,11 @@ final class MenuCell : UICollectionViewCell {
         
         collectionView.register(MenuNameCell.self, forCellWithReuseIdentifier: MenuNameCell.identifier)
         
-        
+    }
+    
+    func configure(with menu: [Menu]) {
+        self.menu = menu
+        collectionView.reloadData()
     }
 }
 
@@ -113,13 +119,16 @@ extension MenuCell: UICollectionViewDelegate {
 extension MenuCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 10
+        return menu.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuNameCell.identifier, for: indexPath) as? MenuNameCell else {
             return UICollectionViewCell()
         }
+        
+        let menu = menu[indexPath.item]
+        cell.configure(with: menu)
         return cell
         
     }

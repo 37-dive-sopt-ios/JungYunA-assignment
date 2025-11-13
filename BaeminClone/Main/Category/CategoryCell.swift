@@ -12,12 +12,16 @@ final class CategoryCell : UICollectionViewCell {
     
     static let identifier: String = "CategoryCell"
     
+    private var category: [Category] = []
+    
+    private var selectedIndex: Int = 0
+    
     // MARK: - Properties
     
     private let lineSpacing: CGFloat = 10
     private let itemSpacing: CGFloat = 10
     private let cellHeight: CGFloat = 46
-    private let collectViewInset: UIEdgeInsets = .init(top: 15, left: 3.5, bottom: 13, right: 3.5)
+    private let collectViewInset: UIEdgeInsets = .init(top: 16, left: 3.5, bottom: 14, right: 3.5)
     
     
     // MARK: - UI Components
@@ -69,11 +73,41 @@ final class CategoryCell : UICollectionViewCell {
         
         
     }
+    
+    func configure(with category: [Category]) {
+        self.category = category
+        collectionView.reloadData()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: CategoryNameCell.identifier,
+            for: indexPath
+        ) as? CategoryNameCell else {
+            return UICollectionViewCell()
+        }
+        
+        let item = category[indexPath.item]
+        cell.configure(with: item)
+        
+        // 🔥 선택된 인덱스와 비교해서 스타일 적용
+        cell.setSelectedStyle(indexPath.item == selectedIndex)
+        
+        return cell
+    }
+    
 }
 
 extension CategoryCell: UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedIndex = indexPath.item
+        collectionView.reloadData()
     }
 }
 
@@ -81,23 +115,18 @@ extension CategoryCell: UICollectionViewDelegate {
 extension CategoryCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 5
+        return category.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryNameCell.identifier, for: indexPath) as? CategoryNameCell else {
-            return UICollectionViewCell()
-        }
-        return cell
-        
-    }
 }
 
 extension CategoryCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: 100, height: 46)
+        return CGSize(width: 90, height: 46)
         
     }
 }
+
+
 

@@ -87,61 +87,61 @@ final class NavigationView : BaseView {
         self.addSubviews(homeButton, homeLabel, ShoppingLabel, ShoppingButton, likeLabel, likeButton, orderLabel, orderButton, baeminLabel, baeminButton)
         
         homeButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(7)
+            $0.top.equalToSuperview().offset(10)
             $0.leading.equalToSuperview().offset(15)
             $0.size.equalTo(CGSize(width: 44, height: 24))
         }
         
         homeLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(36)
+            $0.top.equalToSuperview().offset(40)
             $0.leading.equalToSuperview().offset(15)
             $0.size.equalTo(CGSize(width: 44, height: 10))
         }
         
         ShoppingButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(7)
+            $0.top.equalToSuperview().offset(10)
             $0.leading.equalTo(homeButton.snp.trailing).offset(31)
             $0.size.equalTo(CGSize(width: 44, height: 24))
         }
         
         ShoppingLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(36)
+            $0.top.equalToSuperview().offset(40)
             $0.leading.equalTo(homeLabel.snp.trailing).offset(31)
             $0.size.equalTo(CGSize(width: 44, height: 10))
         }
         
         likeButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(7)
+            $0.top.equalToSuperview().offset(10)
             $0.leading.equalTo(ShoppingButton.snp.trailing).offset(31)
             $0.size.equalTo(CGSize(width: 44, height: 24))
         }
         
         likeLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(36)
+            $0.top.equalToSuperview().offset(40)
             $0.leading.equalTo(ShoppingLabel.snp.trailing).offset(31)
             $0.size.equalTo(CGSize(width: 44, height: 10))
         }
         
         orderButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(7)
+            $0.top.equalToSuperview().offset(10)
             $0.leading.equalTo(likeButton.snp.trailing).offset(31)
             $0.size.equalTo(CGSize(width: 44, height: 24))
         }
         
         orderLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(36)
+            $0.top.equalToSuperview().offset(40)
             $0.leading.equalTo(likeLabel.snp.trailing).offset(31)
             $0.size.equalTo(CGSize(width: 44, height: 10))
         }
         
         baeminButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(7)
+            $0.top.equalToSuperview().offset(10)
             $0.leading.equalTo(orderButton.snp.trailing).offset(31)
             $0.size.equalTo(CGSize(width: 44, height: 24))
         }
         
         baeminLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(36)
+            $0.top.equalToSuperview().offset(40)
             $0.leading.equalTo(orderLabel.snp.trailing).offset(31)
             $0.size.equalTo(CGSize(width: 44, height: 10))
         }

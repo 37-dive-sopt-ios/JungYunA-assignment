@@ -23,11 +23,11 @@ final class ShopNameCell : UICollectionViewCell {
         return label
     }()
     
-    private let imageLabel : UILabel = {
-        let label = UILabel()
-        label.backgroundColor = UIColor(named: "baemin_gray_200")
-        label.layer.cornerRadius = 20
-        return label
+    let logoImage : UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        return imageView
     }()
     
     
@@ -52,12 +52,12 @@ final class ShopNameCell : UICollectionViewCell {
     }
     
     private func setHierarchy() {
-        contentView.addSubviews(nameLabel, imageLabel)
+        contentView.addSubviews(nameLabel, logoImage)
     }
     
     private func setLayout() {
         
-        imageLabel.snp.makeConstraints {
+        logoImage.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.width.equalTo(58)
             $0.height.equalTo(58)
@@ -65,12 +65,21 @@ final class ShopNameCell : UICollectionViewCell {
         }
         
         nameLabel.snp.makeConstraints {
-            $0.top.equalTo(imageLabel.snp.bottom).offset(6)
+            $0.top.equalTo(logoImage.snp.bottom).offset(6)
             $0.width.equalTo(58)
             
         }
-        
-        
+    }
+    
+    func configure(with shop: Shop) {
+        nameLabel.text = shop.logoName
+        logoImage.image = UIImage(named: shop.logoImage)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        nameLabel.text = nil
+        logoImage.image = nil
     }
 }
 

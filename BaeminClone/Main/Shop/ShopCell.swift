@@ -12,6 +12,7 @@ final class ShopCell : UICollectionViewCell {
     
     static let identifier: String = "ShopCell"
     
+    private var shop: [Shop] = []
     // MARK: - Properties
     
     private let lineSpacing: CGFloat = 9
@@ -65,8 +66,11 @@ final class ShopCell : UICollectionViewCell {
         }
         
         collectionView.register(ShopNameCell.self, forCellWithReuseIdentifier: ShopNameCell.identifier)
-        
-        
+    }
+    
+    func configure(with shop: [Shop]) {
+        self.shop = shop
+        collectionView.reloadData()
     }
 }
 
@@ -80,13 +84,16 @@ extension ShopCell: UICollectionViewDelegate {
 extension ShopCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 10
+        return shop.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ShopNameCell.identifier, for: indexPath) as? ShopNameCell else {
             return UICollectionViewCell()
         }
+        
+        let shop = shop[indexPath.item]
+        cell.configure(with: shop)
         return cell
         
     }

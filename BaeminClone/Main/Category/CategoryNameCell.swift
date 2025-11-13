@@ -12,13 +12,14 @@ final class CategoryNameCell : UICollectionViewCell {
     
     static let identifier: String = "CategoryNameCell"
     
+    
+    
     // MARK: - UI Components
     
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Pretendard-Bold", size: 18)
         label.textColor = UIColor(named: "baemin_gray_200")
-        label.text = "음식 배달"
         label.textAlignment = .center
         return label
     }()
@@ -73,9 +74,20 @@ final class CategoryNameCell : UICollectionViewCell {
     
     // MARK: - Configuration
     
-    //    public func configure(feed: FeedModel) {
-    //        nameLabel.text = feed.name
-    //    }
+    public func configure(with category : Category) {
+        nameLabel.text = category.category
+    }
+    
+    func setSelectedStyle(_ isSelected: Bool) {
+        if isSelected {
+            nameLabel.textColor = .black
+            underline.isHidden = false
+        } else {
+            nameLabel.textColor = UIColor(named: "baemin_gray_200")
+            underline.isHidden = true
+        }
+    }
+    
 }
 
 #Preview{

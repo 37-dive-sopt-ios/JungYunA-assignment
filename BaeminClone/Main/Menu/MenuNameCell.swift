@@ -17,17 +17,16 @@ final class MenuNameCell : UICollectionViewCell {
     private let nameLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Pretendard-Regular", size: 14)
-        label.textColor = UIColor(named: "baemin_gray_200")
-        label.text = "치킨"
+        label.textColor = UIColor(named: "baemin_black")
         label.textAlignment = .center
         return label
     }()
     
-    private let imageLabel : UILabel = {
-        let label = UILabel()
-        label.backgroundColor = UIColor(named: "baemin_gray_200")
-        label.layer.cornerRadius = 20
-        return label
+    
+    let menuImage : UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
     
     
@@ -52,12 +51,12 @@ final class MenuNameCell : UICollectionViewCell {
     }
     
     private func setHierarchy() {
-        contentView.addSubviews(nameLabel, imageLabel)
+        contentView.addSubviews(nameLabel, menuImage)
     }
     
     private func setLayout() {
         
-        imageLabel.snp.makeConstraints {
+        menuImage.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.width.equalTo(58)
             $0.height.equalTo(58)
@@ -65,12 +64,23 @@ final class MenuNameCell : UICollectionViewCell {
         }
         
         nameLabel.snp.makeConstraints {
-            $0.top.equalTo(imageLabel.snp.bottom).offset(6)
-            $0.width.equalTo(58)
+            $0.top.equalTo(menuImage.snp.bottom).offset(6)
+            $0.width.equalTo(65)
             
         }
         
         
+    }
+    
+    func configure(with menu: Menu) {
+        nameLabel.text = menu.menuName
+        menuImage.image = UIImage(named: menu.menuImage)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        nameLabel.text = nil
+        menuImage.image = nil
     }
 }
 

@@ -48,21 +48,25 @@ final class WelcomeViewController: BaseViewController {
         return label
     }()
     
-    lazy var backtoLoginButton: UIButton = {
+    lazy var pushToMainButton: UIButton = {
         let button = UIButton()
-        button.setTitle("뒤로가기", for: .normal)
+        button.setTitle("메인으로 가기", for: .normal)
         button.backgroundColor = UIColor(named: "baemin_mint_500")
         button.titleLabel?.font = UIFont(name: "Pretendard-Bold", size: 18)
         button.setTitleColor(UIColor(named: "baemin-white"), for: .normal)
         button.layer.cornerRadius = 4
-        button.addTarget(self, action: #selector(backToLogin), for: .touchUpInside)
+        button.addTarget(self, action: #selector(mainButtonDidTap), for: .touchUpInside)
         return button
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        bindID()
+    }
     
     override func setLayout() {
         
-        view.addSubviews(welcomeImage, welcomeLabel,idLabel,titleLabel, backButton, backtoLoginButton)
+        view.addSubviews(welcomeImage, welcomeLabel,idLabel,titleLabel, backButton, pushToMainButton)
         
         titleLabel.snp.makeConstraints{
             $0.leading.equalToSuperview().inset(111)
@@ -90,11 +94,11 @@ final class WelcomeViewController: BaseViewController {
         
         idLabel.snp.makeConstraints{
             $0.top.equalTo(welcomeLabel.snp.bottom).offset(16)
-            $0.horizontalEdges.equalToSuperview().inset(130)
+            $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(18)
         }
         
-        backtoLoginButton.snp.makeConstraints{
+        pushToMainButton.snp.makeConstraints{
             $0.top.equalTo(idLabel.snp.bottom).offset(326)
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.height.equalTo(52)
@@ -102,9 +106,15 @@ final class WelcomeViewController: BaseViewController {
         }
     }
     
+    
+    private func pushToRootVC() {
+        let rootVC = RootViewController()
+        self.navigationController?.pushViewController(rootVC, animated: true)
+    }
+    
     @objc
-    private func backToLogin(){
-        navigationController?.popViewController(animated: true)
+    private func mainButtonDidTap() {
+        self.pushToRootVC()
     }
     
     private func bindID() {

@@ -12,6 +12,10 @@ final class AddCell : UICollectionViewCell {
     
     static let identifier: String = "AddCell"
     
+    private var banner : [Banner] = []
+    
+    
+    
     
     // MARK: - Properties
     
@@ -65,9 +69,14 @@ final class AddCell : UICollectionViewCell {
         }
         
         collectionView.register(AddNameCell.self, forCellWithReuseIdentifier: AddNameCell.identifier)
-        
+    }
+    
+    func configure(with banner : [Banner]) {
+        self.banner = banner
+        collectionView.reloadData()
         
     }
+    
 }
 
 extension AddCell: UICollectionViewDelegate {
@@ -79,7 +88,7 @@ extension AddCell: UICollectionViewDelegate {
 
 extension AddCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return banner.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -87,18 +96,8 @@ extension AddCell: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        // ✅ 인덱스에 따라 배경색 지정
-        switch indexPath.item {
-        case 0:
-            cell.backgroundColor = .systemBlue
-        case 1:
-            cell.backgroundColor = .systemGreen
-        case 2:
-            cell.backgroundColor = .systemPink
-        default:
-            cell.backgroundColor = .lightGray
-        }
-        
+        let banner = banner[indexPath.item]
+        cell.configure(with: banner)
         return cell
         
     }
@@ -107,7 +106,7 @@ extension AddCell: UICollectionViewDataSource {
 extension AddCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: 390, height: 114)
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         
     }
     

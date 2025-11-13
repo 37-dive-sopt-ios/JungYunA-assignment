@@ -14,9 +14,9 @@ final class AddNameCell : UICollectionViewCell {
     
     // MARK: - UI Components
     
-    private let nameLabel : UILabel = {
-        let label = UILabel()
-        return label
+    private let bannerImage : UIImageView = {
+        let banner = UIImageView()
+        return banner
     }()
     
     
@@ -41,17 +41,26 @@ final class AddNameCell : UICollectionViewCell {
     //    }
     
     private func setHierarchy() {
-        contentView.addSubviews(nameLabel)
+        contentView.addSubviews(bannerImage)
     }
     
     private func setLayout() {
         
-        nameLabel.snp.makeConstraints {
+        bannerImage.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.width.equalToSuperview()
         }
         
         
+    }
+    
+    func configure (with banner : Banner){
+        bannerImage.image = UIImage(named: banner.banner)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bannerImage.image = nil
     }
 }
 

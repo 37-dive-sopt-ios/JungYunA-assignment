@@ -252,17 +252,5 @@ final class LoginViewController: BaseViewController, UITextFieldDelegate {
         }
         return true
     }
-    
-    
-    
-    
-    
-    
 }
 
-
-
-
-#Preview{
-    LoginViewController()
-}

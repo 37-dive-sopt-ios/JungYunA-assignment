@@ -8,6 +8,19 @@
 import UIKit
 import SnapKit
 
+private enum RootSection: Int, CaseIterable {
+    case header
+    case search
+    case banner
+    case category
+    case menu
+    case shop
+    case add
+    case recommend
+    case recent
+    case discount
+}
+
 final class RootViewController: BaseViewController {
     
     // MARK: - UI Components
@@ -46,6 +59,9 @@ final class RootViewController: BaseViewController {
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: MenuCell.identifier)
         collectionView.register(ShopCell.self, forCellWithReuseIdentifier: ShopCell.identifier)
         collectionView.register(AddCell.self, forCellWithReuseIdentifier: AddCell.identifier)
+        collectionView.register(RecommendCell.self, forCellWithReuseIdentifier: RecommendCell.identifier)
+        collectionView.register(RecentCell.self, forCellWithReuseIdentifier: RecentCell.identifier)
+        collectionView.register(DiscountCell.self, forCellWithReuseIdentifier: DiscountCell.identifier)
     }
     
     
@@ -53,7 +69,7 @@ final class RootViewController: BaseViewController {
 
 extension RootViewController: UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        7
+        RootSection.allCases.count
     }
 }
 
@@ -61,100 +77,163 @@ extension RootViewController: UICollectionViewDelegate {
 extension RootViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if section == 0 {
+        guard let sectionType = RootSection(rawValue: section) else { return 0 }
+        
+        switch sectionType {
+        case .header,
+                .search,
+                .banner,
+                .category,
+                .menu,
+                .shop,
+                .add,
+                .recommend,
+                .recent,
+                .discount:
             return 1
-        } else if section == 1 {
-            return 1
-        } else if section == 2{
-            return 1
-        } else if section == 3{
-            return 1
-        } else if section == 4{
-            return 1
-        } else if section == 5 {
-            return 1
-        } else if section == 6 {
-            return 1
-        }
-        return 0
+        } //switch 대상이 enum 타입, enum의 모든 case가 switch문에 명시될 경우 default 생략 가능
+        
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if indexPath.section == 0 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HeaderCell.identifier, for: indexPath) as? HeaderCell else {
-                return UICollectionViewCell()
-            }
+        guard let sectionType = RootSection(rawValue: indexPath.section) else {
+            return UICollectionViewCell()
+        }
+        
+        switch sectionType {
+        case .header:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: HeaderCell.identifier,
+                for: indexPath
+            ) as? HeaderCell else { return UICollectionViewCell() }
             return cell
             
-        } else if indexPath.section == 1 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchHeaderCell.identifier, for: indexPath) as? SearchHeaderCell else {
-                return UICollectionViewCell()
-            }
+        case .search:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: SearchHeaderCell.identifier,
+                for: indexPath
+            ) as? SearchHeaderCell else { return UICollectionViewCell() }
             return cell
-        } else if indexPath.section == 2 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCell.identifier, for: indexPath) as? BannerCell else {
-                return UICollectionViewCell()
-            }
+            
+        case .banner:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: BannerCell.identifier,
+                for: indexPath
+            ) as? BannerCell else { return UICollectionViewCell() }
             return cell
-        } else if indexPath.section == 3 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else {
-                return UICollectionViewCell()
-            }
+            
+        case .category:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: CategoryCell.identifier,
+                for: indexPath
+            ) as? CategoryCell else { return UICollectionViewCell() }
+            cell.configure(with: category)
             return cell
-        } else if indexPath.section == 4 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCell.identifier, for: indexPath) as? MenuCell else {
-                return UICollectionViewCell()
-            }
+            
+        case .menu:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: MenuCell.identifier,
+                for: indexPath
+            ) as? MenuCell else { return UICollectionViewCell() }
+            cell.configure(with: menuData)
             return cell
-        } else if indexPath.section == 5 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ShopCell.identifier, for: indexPath) as? ShopCell else {
-                return UICollectionViewCell()
-            }
+            
+        case .shop:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: ShopCell.identifier,
+                for: indexPath
+            ) as? ShopCell else { return UICollectionViewCell() }
+            cell.configure(with: shopData)
             return cell
-        } else if indexPath.section == 6 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddCell.identifier, for: indexPath) as? AddCell else {
-                return UICollectionViewCell()
-            }
+            
+        case .add:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: AddCell.identifier,
+                for: indexPath
+            ) as? AddCell else { return UICollectionViewCell() }
+            cell.configure(with: banner)   // 너가 만든 configure 그대로 사용
+            return cell
+            
+        case .recommend:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: RecommendCell.identifier,
+                for: indexPath
+            ) as? RecommendCell else { return UICollectionViewCell() }
+            cell.configure(with: dummyStores)
+            return cell
+            
+        case .recent:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: RecentCell.identifier,
+                for: indexPath
+            ) as? RecentCell else { return UICollectionViewCell() }
+            cell.configure(with: mockData)
+            return cell
+            
+        case .discount:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: DiscountCell.identifier,
+                for: indexPath
+            ) as? DiscountCell else { return UICollectionViewCell() }
+            cell.configure(with: discountStore)
             return cell
         }
-        
-        return UICollectionViewCell()
     }
-    
 }
 
+
+
 extension RootViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if indexPath.section == 0  {
-            return CGSize(width: UIScreen.main.bounds.width , height: 24)
-        } else if indexPath.section == 1 {
-            return CGSize(width: UIScreen.main.bounds.width , height: 50)
-        } else if indexPath.section == 2 {
-            return CGSize(width: UIScreen.main.bounds.width , height: 89)
-        } else if indexPath.section == 3 {
-            return CGSize(width: UIScreen.main.bounds.width , height: 48)
-        } else if indexPath.section == 4 {
-            return CGSize(width: UIScreen.main.bounds.width , height: 235)
-        } else if indexPath.section == 5 {
-            return CGSize(width: UIScreen.main.bounds.width , height: 96)
-        } else if indexPath.section == 6 {
-            return CGSize(width: UIScreen.main.bounds.width , height: 114)
+        guard let sectionType = RootSection(rawValue: indexPath.section) else {
+            return CGSize(width: 30, height: 30)
         }
         
-        return CGSize(width: 30, height: 30)
+        let width = UIScreen.main.bounds.width
         
+        switch sectionType {
+        case .header:
+            return CGSize(width: width, height: 29)
+        case .search:
+            return CGSize(width: width, height: 50)
+        case .banner:
+            return CGSize(width: width, height: 89)
+        case .category:
+            return CGSize(width: width, height: 48)
+        case .menu:
+            return CGSize(width: width, height: 235)
+        case .shop:
+            return CGSize(width: width, height: 96)
+        case .add:
+            return CGSize(width: width, height: 140)
+        case .recommend:
+            return CGSize(width: width, height: 350)
+        case .recent:
+            return CGSize(width: width, height: 300)
+        case .discount:
+            return CGSize(width: width, height: 360)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        if section == 4 || section == 5 {
-            return UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+        guard let sectionType = RootSection(rawValue: section) else {
+            return .zero
         }
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        switch sectionType {
+        case .menu, .shop, .add, .recommend, .recent:
+            return UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+        default:
+            return .zero
+        }
     }
 }
 
