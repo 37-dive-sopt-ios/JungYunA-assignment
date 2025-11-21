@@ -38,6 +38,18 @@ final class RootViewController: BaseViewController {
         return collectionView
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setActions()
+    }
+    
+    private func setActions() {
+        navigationView.didTapShoppping = { [weak self] in
+            guard let self else {return}
+            let viewController = LoginViewController_Network()
+            self.navigationController?.pushViewController(viewController, animated: true)}
+    }
+    
     override func setLayout() {
         view.addSubview(collectionView)
         view.addSubview(navigationView)
@@ -153,7 +165,7 @@ extension RootViewController: UICollectionViewDataSource {
                 withReuseIdentifier: AddCell.identifier,
                 for: indexPath
             ) as? AddCell else { return UICollectionViewCell() }
-            cell.configure(with: banner)   // 너가 만든 configure 그대로 사용
+            cell.configure(with: banner) 
             return cell
             
         case .recommend:

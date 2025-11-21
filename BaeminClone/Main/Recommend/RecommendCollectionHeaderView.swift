@@ -76,6 +76,7 @@ class RecommendCollectionHeaderView: UICollectionReusableView {
     
     private func setUI() {
         self.backgroundColor = UIColor(red: 114/255, green: 118/255, blue: 255/255, alpha: 100)
+        
     }
     
     override func layoutSubviews() {

@@ -9,6 +9,8 @@ import SnapKit
 
 final class NavigationView : BaseView {
     
+    var didTapShoppping: (() -> Void)?
+    
     var homeButton : UIButton = {
         let b = UIButton()
         b.setImage(UIImage(named: "home"), for: .normal)
@@ -81,6 +83,13 @@ final class NavigationView : BaseView {
     
     override func setUI() {
         self.backgroundColor = .white
+        
+        ShoppingButton.addTarget(self, action: #selector(didTapShoppingButton), for: .touchUpInside)
+    }
+    
+    @objc
+    private func didTapShoppingButton() {
+        didTapShoppping?()
     }
     
     override func setLayout() {
@@ -149,8 +158,5 @@ final class NavigationView : BaseView {
     }
     
     
-}
-
-#Preview {
-    NavigationView()
+    
 }

@@ -92,7 +92,7 @@ final class CategoryCell : UICollectionViewCell {
         let item = category[indexPath.item]
         cell.configure(with: item)
         
-        // 🔥 선택된 인덱스와 비교해서 스타일 적용
+        // 선택된 인덱스와 비교해서 스타일 적용
         cell.setSelectedStyle(indexPath.item == selectedIndex)
         
         return cell

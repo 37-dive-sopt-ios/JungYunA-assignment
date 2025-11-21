@@ -89,7 +89,3 @@ final class CategoryNameCell : UICollectionViewCell {
     }
     
 }
-
-#Preview{
-    CategoryNameCell()
-}
